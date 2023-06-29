@@ -1,0 +1,64 @@
+<template>
+  <div class="q-pa-md">
+    <q-card dark>
+      <q-card-section>
+        <q-table title="Resolutions" :rows="rows" :columns="columns" row-key="title" flat :sorting="true" dark
+          class="minimalistic-q-table" />
+      </q-card-section>
+    </q-card>
+  </div>
+</template>
+
+<script>
+import { defineComponent } from 'vue'
+import { useTableStore } from 'src/stores/store-table.js'
+const store = useTableStore()
+
+
+const columns = [
+  {
+    name: "title",
+    required: true,
+    label: "Text",
+    align: "left",
+    field: "title",
+    sortable: false
+  },
+  { name: "published", align: "center", label: "Published", field: "published", sortable: true },
+  { name: "rating", label: "Rating", field: "rating", sortable: true },
+  { name: "format", label: "Format", field: "format" },
+  { name: "category", label: "Category", field: "category" },
+  { name: "pk", label: "Delete", field: "pk" }
+];
+
+export default defineComponent({
+  // eslint-disable-next-line vue/no-reserved-component-names
+  name: 'Table',
+
+  computed: {
+    rows() {
+      if (!this.loaded) {
+        store.setTableLoaded();
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        this.loaded = store.getTableLoaded
+        store.fetchResolutions();
+      }
+      return store.getResolutions;
+    }
+  },
+
+  data() {
+    return {
+      columns,
+      loaded: store.getTableLoaded
+    };
+  }
+});
+</script>
+
+<style scoped>
+.minimalistic-q-table {
+  border: none;
+  box-shadow: none;
+}
+</style>
