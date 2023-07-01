@@ -58,6 +58,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
     'http://localhost:8080',
     'http://localhost:9000',
+    'http://192.168.0.12:9000',
 ]
 
 ROOT_URLCONF = 'resolutions.urls'
