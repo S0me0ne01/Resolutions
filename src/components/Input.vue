@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
     <q-form @submit="submitResolution" class="q-gutter-md" style="max-width: 400px; margin: 0 auto;">
-      <q-input dark v-model="title" label="Resolution Title" dense outlined bg-color="black" />
+      <q-input dark v-model="title" label="Resolution Title" type="textarea" dense outlined bg-color="black" />
       <q-input dark v-model="rating" label="Rating" type="number" dense outlined bg-color="black" />
 
       <q-select dark v-model="selectedFormat" :options="formatOptions" label="Format" outlined bg-color="black" />
@@ -31,7 +31,7 @@ export default {
     };
   },
 
-  mounted() {
+  created() {
     this.$axios.get('http://localhost:8000/formats/')
       .then(response => {
         this.formatOptions = response.data;
