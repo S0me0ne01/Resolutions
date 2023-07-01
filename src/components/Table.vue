@@ -55,7 +55,7 @@ export default defineComponent({
   data() {
     return {
       columns,
-      loaded: store.getTableLoaded
+      loaded: false
     };
   },
 
