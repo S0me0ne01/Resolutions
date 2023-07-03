@@ -3,10 +3,12 @@
     <q-card dark>
       <q-card-section>
         <q-table title="Resolutions" :rows="rows" :columns="columns" row-key="title" flat :sorting="true" dark
-          class="minimalistic-q-table">
+          class="minimalistic-q-table" :no-data="true" :no-results="true" :pagination="false">
           <template v-slot:body-cell-delete="props">
-            <q-btn flat round dense color="negative" icon="delete" aria-label="Delete"
-              @click="deleteResolution(props.row.pk)" />
+            <q-td :props="props">
+              <q-btn flat round dense color="negative" icon="delete" aria-label="Delete"
+                @click="deleteResolution(props.row.pk)" />
+            </q-td>
           </template>
         </q-table>
       </q-card-section>
@@ -18,7 +20,6 @@
 import { defineComponent } from 'vue'
 import { useTableStore } from 'src/stores/store-table.js'
 const store = useTableStore()
-
 
 const columns = [
   {
@@ -42,7 +43,7 @@ export default defineComponent({
 
   computed: {
     rows() {
-      if (!this.loaded) {
+      if (typeof window !== 'undefined' && !this.loaded) {
         store.setTableLoaded();
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         this.loaded = store.getTableLoaded
