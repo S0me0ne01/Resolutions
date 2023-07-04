@@ -43,6 +43,11 @@ const linksList = [
     title: 'Homepage',
     icon: 'home',
     link: '/'
+  },
+  {
+    title: 'Random Resolution',
+    icon: 'shuffle',
+    link: '/random'
   }
 ]
 

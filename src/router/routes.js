@@ -2,7 +2,10 @@ const routes = [
   {
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/Index.vue") }],
+    children: [
+      { path: "", component: () => import("pages/Index.vue") },
+      { path: "/random", component: () => import("src/pages/Random.vue") },
+    ],
   },
 
   // Always leave this as last one,
